@@ -1,0 +1,21 @@
+{
+  "name": "nihongo_ima",
+  "version": "1.0.0",
+  "description": "Japanese Vocab Online",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Sandeep S",
+  "license": "ISC",
+  "devDependencies": {
+    "autoprefixer": "^10.0.1",
+    "cssnano": "^4.1.10",
+    "gulp": "^4.0.2",
+    "gulp-changed": "^4.0.2",
+    "gulp-postcss": "^9.0.0",
+    "gulp-sass": "^4.1.0",
+    "gulp-sourcemaps": "^2.6.5",
+    "gulp-terser": "^1.4.0",
+    "node-sass": "^4.14.1"
+  }
+}
