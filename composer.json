@@ -1,0 +1,11 @@
+{
+    "name": "sandeep/nihongo_ima",
+    "description": "Japanese Vocab Online",
+    "type": "project",
+    "require": {},
+    "autoload": {
+        "classmap": [
+            "src/"
+        ]
+    }
+}
