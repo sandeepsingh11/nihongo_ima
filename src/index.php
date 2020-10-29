@@ -1,6 +1,8 @@
 <?php
 
 /**
+ * include config vals
+ * include db connection
  * autoload to include all classes
  */
 require __DIR__ . '/../config.php';
@@ -9,6 +11,10 @@ require __DIR__ . '/../vendor/autoload.php';
 $conn = $pdo;
 
 
+
+/**
+ * get url and redirect accordingly
+ */
 Router::load(__DIR__ . '/routes.php')->direct(getUri(), getMethod(), $conn);
 
 function getUri() {
