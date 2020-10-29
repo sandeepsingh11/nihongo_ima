@@ -2,9 +2,13 @@
 
 class IndexController extends Controller {
 
-    // function __construct() {
-    //     echo 'contructed!';
-    // }
+    private $demo;
+
+    function __construct($demo) {
+        $this->demo = $demo;
+        
+        echo 'contructed!';
+    }
 
     public function get() {
         include_once __DIR__ . '/../views/index.php';

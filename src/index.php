@@ -1,10 +1,15 @@
 <?php
 
+/**
+ * autoload to include all classes
+ */
+require __DIR__ . '/../config.php';
+require __DIR__ . '/models/Database.php';
 require __DIR__ . '/../vendor/autoload.php';
+$conn = $pdo;
 
 
-
-Router::load(__DIR__ . '/routes.php')->direct(getUri(), getMethod());
+Router::load(__DIR__ . '/routes.php')->direct(getUri(), getMethod(), $conn);
 
 function getUri() {
     $uri = trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/');
