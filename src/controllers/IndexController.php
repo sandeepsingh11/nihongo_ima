@@ -2,12 +2,10 @@
 
 class IndexController extends Controller {
 
-    private $demo;
+    private $vocab;
 
-    function __construct($demo) {
-        $this->demo = $demo;
-        
-        echo 'contructed!';
+    function __construct($vocab) {
+        $this->vocab = $vocab;
     }
 
     public function get() {

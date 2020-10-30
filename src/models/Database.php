@@ -1,19 +1,39 @@
 <?php
 
-$host = DB_HOST;
-$db   = DB_NAME;
-$user = DB_USER;
-$pass = DB_PASS;
-$charset = 'utf8mb4';
+class Database {
 
-$dsn = "mysql:host=$host;dbname=$db;charset=$charset";
-$options = [
-    PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
-    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-    PDO::ATTR_EMULATE_PREPARES   => false,
-];
-try {
-    $pdo = new PDO($dsn, $user, $pass, $options);
-} catch (\PDOException $e) {
-    throw new \PDOException($e->getMessage(), (int)$e->getCode());
+    private $host = DB_HOST;
+    private $db   = DB_NAME;
+    private $user = DB_USER;
+    private $pass = DB_PASS;
+    private $charset = 'utf8mb4';
+
+    private $pdo;
+
+    public function connect() {
+        $dsn = "mysql:host=$this->host;dbname=$this->db;charset=$this->charset";
+        $options = [
+            PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
+            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+            PDO::ATTR_EMULATE_PREPARES   => false,
+        ];
+        try {
+            $this->pdo = new PDO($dsn, $this->user, $this->pass, $options);
+            return $this->pdo;
+        } catch (\PDOException $e) {
+            throw new \PDOException($e->getMessage(), (int)$e->getCode());
+        }
+    }
+
+    public function getAllNouns() {
+        $stmt = $this->pdo->query('SELECT * FROM nouns');
+        $nouns_arr = [];
+
+        while ($row = $stmt->fetch()) {
+            array_push($nouns_arr, $row);
+        }
+
+        return $nouns_arr;
+    }
 }
+
