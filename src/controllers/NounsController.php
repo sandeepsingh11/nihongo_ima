@@ -13,7 +13,7 @@ class NounsController extends Controller {
 
 
     public function get() {
-        $nouns_arr = $this->vocab->getNouns();
+        $vocab_arr = $this->vocab->getNouns();
 
         include_once __DIR__ . '/../views/nouns.php';
     }

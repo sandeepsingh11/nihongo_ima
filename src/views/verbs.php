@@ -5,16 +5,19 @@ include_once(__DIR__ . "/../inc/comp.php");
 
 
 
-htmlHeader("Nihongo Ima! | Nouns", []);
+htmlHeader("Nihongo Ima! | Verbs", []);
 
 ?>
 
-    <h1>Nouwuns!</h1>
+    <h1>Vewerbs!</h1>
     
     <?php 
         foreach ($vocab_arr as $vocab) {
             $furigana_arr = explode('ー', $vocab['furi']);
-            $kanji_arr = explode(' ', $vocab['kanji']);
+            
+            // split utf-8 multibyte chars (get each kanji / kana)
+            $pattern = '/(?<!^)(?!$)/u';
+            $kanji_arr = preg_split($pattern,$vocab['kanji']);
 
             ?>
             <ruby>
