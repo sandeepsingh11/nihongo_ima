@@ -9,6 +9,13 @@ class IndexController extends Controller {
     }
 
     public function get() {
+        $vocab_arr = [];
+        if (isset($_GET['search'])) {
+            $vocabToSearch = $_GET['search'];
+
+            $vocab_arr = $this->vocab->searchVocab($vocabToSearch);
+        }
+
         include_once __DIR__ . '/../views/index.php';
     }
 }

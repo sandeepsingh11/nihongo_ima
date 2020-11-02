@@ -12,6 +12,25 @@ class Vocab {
 
 
 
+    /**
+     * search for a vocab
+     */
+    public function searchVocab($vocab) {
+        $row_arr = [];
+
+        $sql = 'SELECT * FROM nouns
+                WHERE kanji = ? OR kana = ? OR romaji = ?';
+
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute([$vocab, $vocab, $vocab]);
+        foreach ($stmt as $row) {
+            array_push($row_arr, $row);
+        }
+
+
+        return $row_arr;
+    }
+
 
     /**
      * insert new noun
