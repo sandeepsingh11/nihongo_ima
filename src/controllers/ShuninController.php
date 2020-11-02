@@ -19,26 +19,28 @@ class ShuninController extends Controller {
 
         $kanji = $_POST['kanji'];
         $furi = $_POST['furi'];
+        $kana = $_POST['kana'];
         $roma = $_POST['roma'];
         $def = $_POST['def'];
 
         if ($vType == 'verb') {
-            $verbType = $_POST['type'];
+            $verbType = $_POST['verb-type'];
         }
+        else if ($vType == 'adj') {
+            $adjType = $_POST['adj-type'];
+        }
+
+
 
         switch ($vType) {
             case 'noun':
-                $insertFunc = 'insertNoun';
-                $insertParams = "$kanji, $furi, $roma, $def";
-                $this->vocab->insertNoun($kanji, $furi, $roma, $def);
+                $this->vocab->insertNoun($kanji, $furi, $kana, $roma, $def);
                 break;
             case 'verb':
-                $insertFunc = 'insertVerb';
-                $insertParams = "$kanji, $furi, $roma, $def, $verbType";
-                $this->vocab->insertVerb($kanji, $furi, $roma, $def, $verbType);
+                $this->vocab->insertVerb($kanji, $furi, $kana, $roma, $def, $verbType);
                 break;
             case 'adj':
-                $insertFunc = 'insertAdj';
+                $this->vocab->insertAdj($kanji, $furi, $kana, $roma, $def, $adjType);
                 break;
             
             default:

@@ -24,16 +24,5 @@ class Database {
             throw new \PDOException($e->getMessage(), (int)$e->getCode());
         }
     }
-
-    public function getAllNouns() {
-        $stmt = $this->pdo->query('SELECT * FROM nouns');
-        $nouns_arr = [];
-
-        while ($row = $stmt->fetch()) {
-            array_push($nouns_arr, $row);
-        }
-
-        return $nouns_arr;
-    }
 }
 
