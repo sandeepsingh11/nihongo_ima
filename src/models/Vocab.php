@@ -17,7 +17,7 @@ class Vocab {
      * insert new noun
      */
     public function insertNoun($kanji, $furi, $kana, $roma, $def) {
-        $sql = 'INSERT INTO nouns (kanji, furi, $kana, romaji, definition)
+        $sql = 'INSERT INTO nouns (kanji, furi, kana, romaji, definition)
                 Values (?, ?, ?, ?, ?)';
 
         $stmt = $this->conn->prepare($sql);

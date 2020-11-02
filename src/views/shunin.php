@@ -1,11 +1,11 @@
 <?php
 
-include_once(__DIR__ . "/../inc/comp.php");
+include_once(__DIR__ . "/partials/comp.php");
 
 
 
 
-htmlHeader("Nihongo Ima! | Shunin", []);
+htmlHeader("Nihongo Ima! | $page_title", []);
 
 ?>
 

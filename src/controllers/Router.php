@@ -43,16 +43,19 @@ class Router {
     /**
      * load uri's requested controller method
      */
-    public function direct($uri, $requestType) {
+    public function direct($uri, $method) {
 
-        if (array_key_exists($uri, $this->routes[$requestType])) {
-            $controller__method = explode('@', $this->routes[$requestType][$uri]);
+        if (array_key_exists($uri, $this->routes[$method])) {
+            $controller__method = explode('@', $this->routes[$method][$uri]);
 
             return $this->callAction($controller__method[0], $controller__method[1]);
         }
+        else {
+            include_once __DIR__ . '/../views/404.php';
+        }
         // else {
         //     return $this->callAction(
-        //         ...explode('@', $this->routes[$requestType]['404'])
+        //         ...explode('@', $this->routes[$method]['404'])
         //     );
         // }
     }

@@ -6,11 +6,14 @@ class ShuninController extends Controller {
 
     function __construct($vocab) {
         $this->vocab = $vocab;
+        $this->page_title = 'Shunin';
     }
 
 
 
     public function get() {
+        $page_title = $this->page_title;
+        
         include_once __DIR__ . '/../views/shunin.php';
     }
 
