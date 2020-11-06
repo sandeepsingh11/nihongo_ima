@@ -13,19 +13,55 @@ class Vocab {
 
 
     /**
-     * search for a vocab
+     * search for any type of vocab
      */
-    public function searchVocab($vocab) {
+    public function searchAnyVocab($vocab) {
         $row_arr = [];
 
-        $sql = 'SELECT * FROM nouns
+
+        // search nouns table first
+        $row_arr = $this->searchVocab('nouns', $vocab);
+        if (sizeof($row_arr) > 0) {
+            return $row_arr;
+        }
+
+        
+        // if no results, search verbs table next
+        $row_arr = $this->searchVocab('verbs', $vocab);
+        if (sizeof($row_arr) > 0) {
+            return $row_arr;
+        }
+
+
+        // if no results, search adjectives table next
+        $row_arr = $this->searchVocab('adjectives', $vocab);
+        if (sizeof($row_arr) > 0) {
+            return $row_arr;
+        }
+
+
+        // else return empty array
+        return $row_arr;
+    }
+
+
+    /**
+     * search a vocab from a specific table
+     */
+    public function searchVocab($table, $vocab) {
+        $row_arr = [];
+
+        $sql = 'SELECT * FROM '. $table . '
                 WHERE kanji = ? OR kana = ? OR romaji = ?';
 
         $stmt = $this->conn->prepare($sql);
         $stmt->execute([$vocab, $vocab, $vocab]);
+
+        
         foreach ($stmt as $row) {
             array_push($row_arr, $row);
         }
+
 
 
         return $row_arr;
@@ -45,6 +81,7 @@ class Vocab {
         header('Location: /shunin');
     }
 
+
     /**
      * get all nouns
      */
@@ -59,6 +96,7 @@ class Vocab {
         return $nouns_arr;
     }
 
+
     /**
      * insert new verb
      */
@@ -71,6 +109,7 @@ class Vocab {
 
         header('Location: /shunin');
     }
+
 
     /**
      * get all verbs
@@ -86,6 +125,7 @@ class Vocab {
         return $verbs_arr;
     }
 
+
     /**
      * insert new adjective
      */
@@ -98,6 +138,7 @@ class Vocab {
 
         header('Location: /shunin');
     }
+
 
     /**
      * get all adjectives

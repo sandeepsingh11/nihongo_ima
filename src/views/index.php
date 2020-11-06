@@ -14,6 +14,14 @@ htmlHeader("Nihongo Ima!", []);
 
 
 <form method="get">
+    <label for="vocab-type">Search for this type:</label>
+    <select name="vocab-type" id="vocab-type">
+        <option value="any">Any</option>
+        <option value="nouns">Nouns</option>
+        <option value="verbs">Verbs</option>
+        <option value="adjectives">Adjectives</option>
+    </select><br><br>
+
     <label for="search">Search for a vocab: </label><br>
     <input type="search" name="search" id="search"><br><br>
 

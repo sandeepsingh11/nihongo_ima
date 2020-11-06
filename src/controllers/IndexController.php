@@ -10,11 +10,23 @@ class IndexController extends Controller {
 
     public function get() {
         $vocab_arr = [];
+
+        // form search logic
         if (isset($_GET['search'])) {
             $vocabToSearch = $_GET['search'];
+            $vocabType = $_GET['vocab-type'];
 
-            $vocab_arr = $this->vocab->searchVocab($vocabToSearch);
+            if ($vocabType == 'any') {
+                // search through all tables
+                $vocab_arr = $this->vocab->searchAnyVocab($vocabToSearch);
+            }
+            else {
+                // search through a specific table
+                $vocab_arr = $this->vocab->searchVocab($vocabType, $vocabToSearch);
+            }
         }
+
+
 
         include_once __DIR__ . '/../views/index.php';
     }
