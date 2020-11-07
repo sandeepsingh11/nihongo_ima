@@ -16,11 +16,25 @@ var changed = require('gulp-changed'); // https://github.com/sindresorhus/gulp-c
 
 
 
+var sassSrcDirPath = 'src/style/sass/';
+var mainSassFilePath = 'src/style/sass/main.scss';
+var cssSrcDirPath = 'src/style/css/';
+var mainCssFilePath = 'src/style/css/main.scss';
+var cssBuildDirPath = 'build/style/css/';
+
+var jsSrcDirPath = 'src/js/';
+var shuninJsSrcFilePath = 'src/js/shunin.js';
+var jsBuildDirPath = 'build/js/';
+
+
+
+
+
 // compile sass --> css
 gulp.task('sass', function() {
-    return gulp.src('src/style/sass/main.sass')
+    return gulp.src(mainSassFilePath)
         .pipe(sass().on('error', sass.logError))
-        .pipe(gulp.dest('src/style/css/'))
+        .pipe(gulp.dest(cssSrcDirPath))
 });
 
 
@@ -33,11 +47,11 @@ gulp.task('css', function() {
         cssnano()
     ];
 
-    return gulp.src('src/style/css/main.css')
+    return gulp.src(mainCssFilePath)
         .pipe(sourcemaps.init())
         .pipe(postcss(plugins))
         .pipe(sourcemaps.write('.'))
-        .pipe(gulp.dest('build/style/css/'))
+        .pipe(gulp.dest(cssBuildDirPath))
 });
 
 
@@ -45,9 +59,9 @@ gulp.task('css', function() {
 gulp.task('js', function() {
     // use terser
 
-    return gulp.src('src/js/main.js')
+    return gulp.src(shuninJsSrcFilePath)
         .pipe(terser())
-        .pipe(gulp.dest('build/js'))
+        .pipe(gulp.dest(jsBuildDirPath))
 });
 
 
@@ -75,7 +89,7 @@ gulp.task('ass', function() {
 
 
 // build js and css for production
-gulp.task('build', gulp.series(['js', 'css', 'html', 'ass', 'flowchart']), function() {
+gulp.task('build', gulp.series(['js', 'css', 'html', 'ass']), function() {
     console.log('Building filezz :pog:');
 });
 
@@ -105,5 +119,5 @@ gulp.task('build-ass', gulp.series(['ass']), function() {
 
 // watch sass files to compile on save
 gulp.task('watch', function() {
-    gulp.watch('src/style/sass/*.sass', gulp.series(['sass']));
+    gulp.watch(sassSrcDirPath + '*.scss', gulp.series(['sass']));
 });

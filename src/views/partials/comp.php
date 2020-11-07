@@ -12,8 +12,8 @@ function htmlHeader($title = "Nihongo Ima!", $extraCSS = array()) {
         <title><?php echo ($title) ?></title>
         <base href="http://nihongoima.xyz/">
 
-        <!-- <link rel="stylesheet" href=<?php // echo "/style/css/normalize.css" ?>> -->
-        <!-- <link rel="stylesheet" href="/style/css/main.css"> -->
+        <link rel="stylesheet" href="/style/css/normalize.css">
+        <link rel="stylesheet" href="/style/css/main.css">
         <?php
 
         if (sizeof($extraCSS) > 0) {

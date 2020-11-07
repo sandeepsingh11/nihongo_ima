@@ -1,0 +1,29 @@
+@charset "UTF-8";
+@font-face {
+  font-family: 'SimSun';
+  src: url("/assets/fonts/SimSun.woff") format("woff"), url("/assets/fonts/SimSun.ttf") format("truetype"); }
+
+@font-face {
+  font-family: 'Kochi-Mincho';
+  src: url("/assets/fonts/Kochi-Mincho.woff") format("woff"), url("/assets/fonts/Kochi-Mincho.ttf") format("truetype"); }
+
+@font-face {
+  font-family: 'Mplus-Light';
+  src: url("/assets/fonts/mplus-2p-light.woff") format("woff"), url("/assets/fonts/mplus-2p-light.ttf") format("truetype"); }
+
+@font-face {
+  font-family: 'Mplus-Regular';
+  src: url("/assets/fonts/mplus-2p-regular.woff") format("woff"), url("/assets/fonts/mplus-2p-light.ttf") format("truetype"); }
+
+* {
+  box-sizing: border-box; }
+
+html {
+  font-family: "Mplus-Light", "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", Osaka, "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
+  font-size: 18px; }
+
+h1 {
+  font-family: "SimSun", "Kochi-Mincho", sans-serif; }
+
+ruby {
+  font-size: 32px; }
