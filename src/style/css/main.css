@@ -1,7 +1,7 @@
 @charset "UTF-8";
 @font-face {
   font-family: 'SimSun';
-  src: url("/assets/fonts/SimSun.woff") format("woff"), url("/assets/fonts/SimSun.ttf") format("truetype"); }
+  src: url("/assets/fonts/SimSun.woff") format("woff"), url("/assets/fonts/SimSun.ttc") format("truetype"); }
 
 @font-face {
   font-family: 'Kochi-Mincho';
@@ -19,11 +19,54 @@
   box-sizing: border-box; }
 
 html {
-  font-family: "Mplus-Light", "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", Osaka, "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
+  font-family: "SimSun", "Kochi-Mincho", sans-serif;
   font-size: 18px; }
 
+a {
+  display: block;
+  text-decoration: none;
+  color: inherit; }
+
 h1 {
-  font-family: "SimSun", "Kochi-Mincho", sans-serif; }
+  font-family: "Mplus-Light", "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", Osaka, "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif; }
 
 ruby {
   font-size: 32px; }
+
+#navbar {
+  display: flex;
+  justify-content: space-between;
+  background-color: #333;
+  color: #eee;
+  padding: 0.5rem; }
+  #navbar #hamburger {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-content: center;
+    width: 30px;
+    height: 22px; }
+    #navbar #hamburger .hamburger-line {
+      background-color: #eee;
+      height: 2px;
+      margin: 2.5px; }
+
+#nav-container {
+  display: flex;
+  background-color: #333;
+  color: #eee;
+  overflow: hidden; }
+  #nav-container #nav-title {
+    writing-mode: vertical-lr;
+    background-color: salmon;
+    padding: 0.5rem;
+    font-size: 1.2rem;
+    text-align: center; }
+  #nav-container #nav-item-container {
+    width: 100%;
+    text-align: center; }
+    #nav-container #nav-item-container .nav-item {
+      padding: 0.25rem 0; }
+      #nav-container #nav-item-container .nav-item:hover, #nav-container #nav-item-container .nav-item:focus, #nav-container #nav-item-container .nav-item:active {
+        background-color: lightpink;
+        color: #222; }

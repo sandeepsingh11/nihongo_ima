@@ -31,7 +31,6 @@ function htmlHeader($title = "Nihongo Ima!", $extraCSS = array()) {
     </head>
     <body>
         <?php include_once __DIR__ . './nav.php' ?>
-        <h1>日本語今！</h1>
 
     <?php
 }
@@ -41,6 +40,7 @@ function htmlHeader($title = "Nihongo Ima!", $extraCSS = array()) {
 function htmlFooter() {
     ?>
 
+    <script type="text/javascript" src="/js/main.js"></script>
     <script type="text/javascript" src="/js/shunin.js"></script>
 
     </body>

@@ -10,9 +10,6 @@ htmlHeader("Nihongo Ima!", []);
 ?>
 
 
-<h1>Hewwo oworld</h1>
-
-
 <form method="get">
     <label for="vocab-type">Search for this type:</label>
     <select name="vocab-type" id="vocab-type">
