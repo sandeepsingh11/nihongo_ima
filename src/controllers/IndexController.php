@@ -27,6 +27,10 @@ class IndexController extends Controller {
         }
 
 
+        // get daily vocab
+        $dailyVocab = $this->vocab->getDailyVocab();
+
+
 
         include_once __DIR__ . '/../views/index.php';
     }

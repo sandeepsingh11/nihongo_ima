@@ -13,6 +13,67 @@ class Vocab {
 
 
     /**
+     * get a random vocab per day
+     */
+    public function getDailyVocab() {
+        $date = date('Y,m,d');
+        list($year, $month, $day) = explode(',', $date);
+
+
+        // create a unique number based on the current date
+        $uniqueNum = intval($year) + intval($month) + intval($day);
+
+
+        // get a vocab type based on the unique date value
+        $vocabType_int = $uniqueNum % 3;
+
+        switch ($vocabType_int) {
+            case 0:
+                $vocabType_str = 'nouns';
+                break;
+            
+            case 1:
+                $vocabType_str = 'verbs';
+                break;
+            
+            case 2:
+                $vocabType_str = 'adjectives';
+                break;
+            
+            default:
+                $vocabType_str = '';
+                break;
+        }
+        
+
+        // get a random vocab
+        $maxVocab = $this->getNumVocab($vocabType_str);
+        $vocabId = ($uniqueNum % $maxVocab) + 1;
+
+        $vocab_arr = $this->searchVocab($vocabType_str, $vocabId, $maxVocab);
+
+
+        
+        return $vocab_arr;
+    }
+
+
+
+    /**
+     * get the total number of vocabs from a specified table
+     */
+    private function getNumVocab(string $table) {
+        $count = 0;
+
+        $sql = 'SELECT count(*) FROM ' . $table;
+        $count = $this->conn->query($sql)->fetchColumn();
+
+        return $count;
+    }
+
+    
+
+    /**
      * search for any type of vocab
      */
     public function searchAnyVocab($vocab) {
@@ -45,27 +106,57 @@ class Vocab {
     }
 
 
+
     /**
      * search a vocab from a specific table
+     * using a vocab string will return at least one index
+     * using a vocab integer will return one index
      */
-    public function searchVocab($table, $vocab) {
-        $row_arr = [];
-
-        $sql = 'SELECT * FROM '. $table . '
-                WHERE kanji = ? OR kana = ? OR romaji = ?';
-
-        $stmt = $this->conn->prepare($sql);
-        $stmt->execute([$vocab, $vocab, $vocab]);
-
+    public function searchVocab(string $table, $vocab_str_int, int $max = -1) {
         
-        foreach ($stmt as $row) {
-            array_push($row_arr, $row);
+        if (is_string($vocab_str_int)) {
+            // if searching by string
+            $row_arr = [];
+
+
+            $sql = 'SELECT * FROM '. $table . '
+                    WHERE kanji = ? OR kana = ? OR romaji = ?';
+    
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute([$vocab_str_int, $vocab_str_int, $vocab_str_int]);
+            
+            
+            foreach ($stmt as $row) {
+                array_push($row_arr, $row);
+            }
+
+
+
+            return $row_arr;
         }
+        else {
+            // if searching by number (id)
+            $sql = 'SELECT * FROM '. $table . '
+                    WHERE id = ?';
+    
+                
+            do {
+                $stmt = $this->conn->prepare($sql);
+                $stmt->execute([$vocab_str_int]);
+                
+                $row = $stmt->fetch();
 
+                $vocab_str_int = ($vocab_str_int * 3) % $max;
+            } while (!$row);
+            
+            // if id not found, check another id
+    
+            
 
-
-        return $row_arr;
+            return $row;
+        }
     }
+
 
 
     /**
@@ -80,6 +171,7 @@ class Vocab {
 
         header('Location: /shunin');
     }
+
 
 
     /**
@@ -97,6 +189,7 @@ class Vocab {
     }
 
 
+
     /**
      * insert new verb
      */
@@ -109,6 +202,7 @@ class Vocab {
 
         header('Location: /shunin');
     }
+
 
 
     /**
@@ -126,6 +220,7 @@ class Vocab {
     }
 
 
+
     /**
      * insert new adjective
      */
@@ -138,6 +233,7 @@ class Vocab {
 
         header('Location: /shunin');
     }
+
 
 
     /**
